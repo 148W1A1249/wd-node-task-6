@@ -2,15 +2,21 @@ import React from "react";
 import { Formik } from "formik";
 // import * as EmailValidator from "email-validator";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Switch,
+//   Route
+// } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {emailValidation} from '../helpers/controllers';
+import Home from './home';
 
 toast.configure()
 
 function Login(){
-
+let history = useHistory();
   return<>
     <div className="login_form">
       <h1 className="mt-5">Login form</h1>
@@ -25,6 +31,9 @@ function Login(){
         .then(res=>{       
           if(res.data.type ==="success"){
             toast.success(res.data.message);
+            history.push("/home");
+            // <Redirect to="/home" />
+            // <Redirect  path="/home" component={Home} exact={true}/> 
           } else{
             toast.error(res.data.message);
           }      
